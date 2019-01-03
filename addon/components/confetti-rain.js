@@ -148,8 +148,21 @@ export default Ember.Component.extend({
     }
   },
 
+  killParticle(index) {
+    this.get('particles')[index].isDead = true;
+  },
+
   checkForReposition(particle, index) {
-    if (particle.x > this.get('windowWidth') + 20 || particle.x < -20 || particle.y > this.get('windowHeight')) {
+    let isOffscreen = particle.x > this.get('windowWidth') + 20 ||
+                      particle.x < -20 ||
+                      particle.y > this.get('windowHeight');
+
+    if (isOffscreen) {
+      if (!this.get('isEnabled')) {
+        this.killParticle(index);
+        return;
+      }
+
       if (index % 5 > 0 || index % 2 === 0) {
         //66.67% of the flakes
         this.repositionParticle(particle, random() * this.get('windowWidth'), -10, Math.floor(random() * 10) - 10);
@@ -183,7 +196,16 @@ export default Ember.Component.extend({
       return;
     }
 
-    raf(Ember.run.bind(this, 'animationLoop'));
+    let areAllParticlesDead = this.get('particles').filter(particle => !particle.isDead).length === 0;
+
+    if (areAllParticlesDead) {
+      // Used to debug disabling the animation loop
+      this.element.dataset.isDoneRunning = true;
+
+      return;
+    }
+
+    raf(bind(this, 'animationLoop'));
 
     return this.draw();
   }
