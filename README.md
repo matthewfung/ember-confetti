@@ -2,6 +2,8 @@
 [![Build Status](https://travis-ci.org/san650/ember-confetti.svg?branch=master)](https://travis-ci.org/san650/ember-confetti)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-confetti.svg)](https://emberobserver.com/addons/ember-confetti)
 
+Test
+
 This addon exposes an `{{confetti-rain}}` component for your ember application.
 
 ![Sample](./confetti.gif)
