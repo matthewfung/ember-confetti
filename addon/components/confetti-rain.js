@@ -1,7 +1,10 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/string';
-import { schedule, bind } from '@ember/runloop';
+import { schedule } from '@ember/runloop';
+import Ember from 'ember';
+
+const { bind } = Ember.run;
 
 const raf = window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
