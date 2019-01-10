@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { computed } = Ember;
+const { computed, run: { bind } } = Ember;
 
 const raf = window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
